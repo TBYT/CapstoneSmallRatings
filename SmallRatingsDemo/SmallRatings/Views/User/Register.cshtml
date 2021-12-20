@@ -1,0 +1,70 @@
+﻿
+@model SmallRatings.Models.UserInfo
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Register</h1>
+<hr />
+
+@*Html.BeginForm is the Html Helper Extension Method that is used for creating and rendering
+    the form in HTML. This method makes your job easier in creating form.
+    Syntax: Html.BeginForm("ActionMethod", "ControllerName","Get⁄Post Method")
+    ActionMethod – It defines which action method is look for when submit button is clicked.
+    ControllerName – It defines, which controller keeps the defined action method.
+    Get/Post Method – it defines the method you want to use to send data from form to controller. *@
+@using (Html.BeginForm("Register", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-4">
+            @*(Tag Helpers) -- ValidationSummary.All will display both property and model level
+        validations messages while ValidationSummary.ModelOnly will
+        display only validation messages that apply to the model level.*@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+
+        </div>
+    </div>
+}
+@*Come down after the current final div*@
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@*Used for "client side validation" (javascript).
+    It does not let the user send the form if it is not valid
+    (according to Model Validation).*@
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

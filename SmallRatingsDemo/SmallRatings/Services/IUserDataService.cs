@@ -10,8 +10,9 @@ namespace SmallRatings.Services
     interface IUserDataService
     {
         List<UserInfo> GetAllUsers();
-        UserInfo GetUserByID(int id);
         bool Insert(UserInfo model);
         int Delete(UserInfo model);
+
+        UserInfo LoginUser(LoginInfo model);
     }
 }

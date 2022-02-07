@@ -5,6 +5,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\Index3.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\Index3.cshtml" />
+    <None Include="wwwroot\lib\assets\bootstrap\css\bootstrap.min.css" />
+    <None Include="wwwroot\lib\assets\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\assets\css\Features-Boxed.css" />
+    <None Include="wwwroot\lib\assets\fonts\font-awesome.min.css" />
+    <None Include="wwwroot\lib\assets\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\lib\assets\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\lib\assets\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\lib\assets\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\lib\assets\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\lib\assets\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\lib\assets\img\downloads-bg.jpg" />
+    <None Include="wwwroot\lib\assets\img\intro-bg.jpg" />
+    <None Include="wwwroot\lib\assets\img\SmallRatingsLogo1.png" />
+    <None Include="wwwroot\lib\assets\img\SmallRatingsLogo2.png" />
+    <None Include="wwwroot\lib\assets\js\grayscale.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\fontawesome-webfont.woff2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 

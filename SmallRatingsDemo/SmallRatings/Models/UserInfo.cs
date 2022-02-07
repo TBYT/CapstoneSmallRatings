@@ -10,7 +10,7 @@ namespace SmallRatings.Models
         public int UserID { get; set; }
 
         [Display(Name = "First Name")]
-        [Required(ErrorMessage = "Please enter your first and last name.")]
+        [Required(ErrorMessage = "Please enter your first name.")]
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
@@ -18,7 +18,7 @@ namespace SmallRatings.Models
         public string LastName { get; set; }
 
         [Display(Name = "Username")]
-        [Required(ErrorMessage = "Please enter the company name.")]
+        [Required(ErrorMessage = "Please enter a username.")]
         public string Username { get; set; }
 
         [DataType(DataType.EmailAddress)]
@@ -30,5 +30,10 @@ namespace SmallRatings.Models
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Please enter a password.")]
         public string Password { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "Please enter a phone number.")]
+        public int Number { get; set; }
     }
 }

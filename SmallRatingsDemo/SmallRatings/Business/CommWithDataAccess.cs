@@ -34,10 +34,16 @@ namespace SmallRatings.Business
             return userDao.Insert(user);
         }
 
-        public bool LoginUser(LoginInfo user)
+        public UserInfo LoginUser(LoginInfo user)
         {
             userDao = new UserDAO();
             return userDao.LoginUser(user);
+        }
+
+        public bool UpdateUser(UserInfo obj)
+        {
+            userDao = new UserDAO();
+            return userDao.UpdateUser(obj);
         }
     }
 }

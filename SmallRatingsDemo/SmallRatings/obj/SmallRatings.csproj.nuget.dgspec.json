@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-451\\Workspace\\SmallRatingsDemo\\SmallRatings\\SmallRatings.csproj": {}
+    "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\Capstone---Small-Ratings\\SmallRatingsDemo\\SmallRatings\\SmallRatings.csproj": {}
   },
   "projects": {
-    "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-451\\Workspace\\SmallRatingsDemo\\SmallRatings\\SmallRatings.csproj": {
+    "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\Capstone---Small-Ratings\\SmallRatingsDemo\\SmallRatings\\SmallRatings.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-451\\Workspace\\SmallRatingsDemo\\SmallRatings\\SmallRatings.csproj",
+        "projectUniqueName": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\Capstone---Small-Ratings\\SmallRatingsDemo\\SmallRatings\\SmallRatings.csproj",
         "projectName": "SmallRatings",
-        "projectPath": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-451\\Workspace\\SmallRatingsDemo\\SmallRatings\\SmallRatings.csproj",
+        "projectPath": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\Capstone---Small-Ratings\\SmallRatingsDemo\\SmallRatings\\SmallRatings.csproj",
         "packagesPath": "C:\\Users\\anoth\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-451\\Workspace\\SmallRatingsDemo\\SmallRatings\\obj\\",
+        "outputPath": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\Capstone---Small-Ratings\\SmallRatingsDemo\\SmallRatings\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\anoth\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -36,7 +36,36 @@ namespace SmallRatings.Services
             }
             return newIdNumber;
         }
+
+        public bool UpdateUser(UserInfo obj)
+        {
+            bool success = false;
+
+            string sqlStatement = "UPDATE Users SET FIRSTNAME = @Firstname, LASTNAME = @Lastname, USERNAME = @Username, EMAIL = @Email, NUMBER = @Number WHERE ID = @ID";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlStatement, connection);
+                    
+                        command.Parameters.AddWithValue("@Id", obj.UserID);
+                        command.Parameters.AddWithValue("@Firstname", obj.FirstName);
+                        command.Parameters.AddWithValue("@Lastname", obj.LastName);
+                        command.Parameters.AddWithValue("@Username", obj.Username);
+                        command.Parameters.AddWithValue("@Email", obj.Email);
+                        command.Parameters.AddWithValue("@Number", obj.Number);
+
+                        if(command.ExecuteNonQuery() != 0)
+                        {
+                            success = true;
+                        }
+                    
+                    connection.Close();
+                }
+            return success;
+            }
         
+
         public List<UserInfo> GetAllUsers()
         {
             List<UserInfo> foundProducts = new List<UserInfo>();
@@ -63,64 +92,42 @@ namespace SmallRatings.Services
             return foundProducts;
         }
 
-        public UserInfo GetUserByID(int id)
+        public UserInfo LoginUser(LoginInfo user)
         {
-            UserInfo foundUser = null;
-            string sqlStatement = "SELECT * FROM [dbo].[Users] WHERE Id = @Id";
+            string sqlStatement = "SELECT * FROM dbo.Users WHERE (USERNAME = @Username) AND (PASSWORD = @Password)";
+            UserInfo userInfo = null;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand(sqlStatement, connection);
-                command.Parameters.AddWithValue("@Id", id);
-                try
+                using (SqlCommand command = new SqlCommand(sqlStatement, connection))
                 {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    /*while (reader.Read())
-                    { //changed after submission of mile 2
-                        foundProduct = new UserInfo { Id = (int)reader[0], Name = (string)reader[1], Price = (decimal)reader[2], Stock = (int)reader[3], Description = (string)reader[4] };
-                    }*/
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
+                    command.Parameters.AddWithValue("@Username", user.Username);
+                    command.Parameters.AddWithValue("@Password", user.Password);
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        
+                            while (reader.Read())
+                            {
+                                userInfo = new UserInfo();
+                                userInfo.UserID = Convert.ToInt32(reader["ID"]);
+                                userInfo.Username = reader["USERNAME"].ToString();
+                                userInfo.Number = Convert.ToInt32(reader["NUMBER"]);
+                                userInfo.FirstName = reader["FIRSTNAME"].ToString();
+                                userInfo.LastName = reader["LASTNAME"].ToString();
+                                userInfo.Email = reader["EMAIL"].ToString();
+                                userInfo.Password = reader["PASSWORD"].ToString();
+                            }
+                        
+                    connection.Close();
                 }
             }
-            return foundUser;
-        }
-
-        public bool LoginUser(LoginInfo user)
-        {
-            string sqlStatement = "SELECT * FROM [dbo].[Users] WHERE (USERNAME = @Username AND PASSWORD = @Password)";
-            bool success = false;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand(sqlStatement, connection);
-                command.Parameters.AddWithValue("@Username", user.Username);
-                command.Parameters.AddWithValue("@Password", user.Password);
-                try
-                {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        success = true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-
-            }
-            return success;
+            return userInfo;
         }
 
         public bool Insert(UserInfo user)
         {
             string sqlStatement = @"INSERT INTO [dbo].[Users]
-           ([FIRSTNAME],[LASTNAME],[USERNAME],[PASSWORD],[EMAIL],[NUMBER],[AVATAR],[SUSPENDED]) VALUES (@FirstName,@LastName,@Username,@Password,@Email,NULL,NULL,NULL); SELECT SCOPE_IDENTITY()";
+           ([FIRSTNAME],[LASTNAME],[USERNAME],[PASSWORD],[EMAIL],[NUMBER],[AVATAR],[SUSPENDED]) VALUES (@FirstName,@LastName,@Username,@Password,@Email,@Number,NULL,NULL); SELECT SCOPE_IDENTITY()";
             bool success = false;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -130,6 +137,7 @@ namespace SmallRatings.Services
                 command.Parameters.AddWithValue("@LastName", user.LastName);
                 command.Parameters.AddWithValue("@Username", user.Username);
                 command.Parameters.AddWithValue("@Password", user.Password);
+                command.Parameters.AddWithValue("@Number", user.Number);
                 command.Parameters.AddWithValue("@Email", user.Email);
                 try
                 {

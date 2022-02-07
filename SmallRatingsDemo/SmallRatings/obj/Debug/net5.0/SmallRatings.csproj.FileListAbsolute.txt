@@ -28,6 +28,7 @@ C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\SmallRatings.TagHelpers.input.cache
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\SmallRatings.TagHelpers.output.cache
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\SmallRatings.RazorCoreGenerate.cache
+C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
@@ -47,4 +48,3 @@ C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\SmallRatings.pdb
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\SmallRatings.genruntimeconfig.cache
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\SmallRatings.csprojAssemblyReference.cache
-C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs

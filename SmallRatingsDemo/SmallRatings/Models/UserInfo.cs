@@ -26,14 +26,14 @@ namespace SmallRatings.Models
         [Required(ErrorMessage = "Please enter your email.")]
         public string Email { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        [Required(ErrorMessage = "Please enter a password.")]
-        public string Password { get; set; }
-
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = "Please enter a phone number.")]
         public int Number { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "Please enter a password.")]
+        public string Password { get; set; }
     }
 }

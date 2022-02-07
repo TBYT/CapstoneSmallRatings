@@ -13,10 +13,7 @@ namespace SmallRatings.Business
     public class CommWithDataAccess
     {
         UserDAO userDao = new UserDAO();
-        /// <summary>
-        /// Pass through the GetAllEmployees into Presentation Layer.
-        /// </summary>
-        /// <returns></returns>
+       
         public IEnumerable<UserInfo> GetAllUsers()
         {
             userDao = new UserDAO();
@@ -24,10 +21,12 @@ namespace SmallRatings.Business
             return allUsers;
         }
 
-        /// <summary>
-        /// Pass the employee post data to our DataAccess Layer.
-        /// </summary>
-        /// <param name="emp"></param>
+        public bool CheckUserExists(string username)
+        {
+            userDao = new UserDAO();
+            return userDao.CheckUserExists(username);
+        }
+
         public bool AddUser(UserInfo user)
         {
             userDao = new UserDAO();

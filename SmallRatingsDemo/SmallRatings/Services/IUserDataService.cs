@@ -13,6 +13,7 @@ namespace SmallRatings.Services
         bool Insert(UserInfo model);
         int Delete(UserInfo model);
 
+        bool CheckUserExists(string username);
         UserInfo LoginUser(LoginInfo model);
     }
 }

@@ -30,7 +30,10 @@ namespace EmployeeCrud.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            var UserID = HttpContext.Session.GetInt32("_Id");
+            if (UserID.HasValue == false)
+                return View();
+            else return View("Index");
         }
 
         [HttpPost]
@@ -42,11 +45,15 @@ namespace EmployeeCrud.Controllers
             //Make sure the data is valid (another form of validation
             if(ModelState.IsValid)
             {
-                if (userDAL.AddUser(obj))
+                if (userDAL.CheckUserExists(obj.Username) == false)
                 {
-                    TempData["RegMessage"] = "Registration Successful. Navigate to Navbar to Login!";
-                    return RedirectToAction("Index", "Home");
+                    if (userDAL.AddUser(obj))
+                    {
+                        TempData["RegMessage"] = "Registration Successful. Navigate to Navbar to Login!";
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
+                else TempData["UserExists"] = "This username already exists.";
             }
             return View(obj);
         }
@@ -54,7 +61,10 @@ namespace EmployeeCrud.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            var UserID = HttpContext.Session.GetInt32("_Id");
+            if (UserID.HasValue == false)
+                return View();
+            else return View("Index");
         }
 
         [HttpGet]
@@ -99,21 +109,40 @@ namespace EmployeeCrud.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update([Bind] UserInfo obj)
+        public IActionResult Update([Bind] UserInfo obj, IFormCollection form)
         {
-            //if (ModelState.IsValid)
+            string NewPass = form["NewPass"].ToString();
+            string ConfirmNewPass = form["ConfirmNewPass"].ToString();
+            if (ModelState.IsValid)
             {
-                obj.UserID = staticUser.UserID;
-                if (userDAL.UpdateUser(obj))
+                if (obj.Username == staticUser.Username || userDAL.CheckUserExists(obj.Username) == false)
                 {
-                    staticUser = obj;
-                    TempData["RegMessage"] = "Profile Update Successful!";
-                    return RedirectToAction("Index", "User");
+                    if (NewPass != ConfirmNewPass)
+                    {
+                        TempData["NewPass"] = "New Passwords does not match each other";
+                        return View(obj);
+                    }
+                    else if (obj.Password != staticUser.Password)
+                    {
+                        TempData["PasswordCheck"] = "Current Password does not match the one on record!";
+                        return View(obj);
+                    }
+                    else
+                    {
+                        if (NewPass != "" && ConfirmNewPass != "")
+                            obj.Password = NewPass;
+                        obj.UserID = staticUser.UserID;
+                        if (userDAL.UpdateUser(obj))
+                        {
+                            staticUser = obj;
+                            TempData["RegMessage"] = "Profile Update Successful!";
+                            return RedirectToAction("Index", "User");
+                        }
+                    }
                 }
-                else return View();
+                else TempData["UserCheck"] = "This username is already taken.";
             }
-            //else return View(obj);
-
+            return View(obj);
         }
 
     }

@@ -41,7 +41,7 @@ namespace SmallRatings.Services
         {
             bool success = false;
 
-            string sqlStatement = "UPDATE Users SET FIRSTNAME = @Firstname, LASTNAME = @Lastname, USERNAME = @Username, EMAIL = @Email, NUMBER = @Number WHERE ID = @ID";
+            string sqlStatement = "UPDATE Users SET FIRSTNAME = @Firstname, LASTNAME = @Lastname, USERNAME = @Username, PASSWORD = @Password, EMAIL = @Email, NUMBER = @Number WHERE ID = @ID";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -54,8 +54,9 @@ namespace SmallRatings.Services
                         command.Parameters.AddWithValue("@Username", obj.Username);
                         command.Parameters.AddWithValue("@Email", obj.Email);
                         command.Parameters.AddWithValue("@Number", obj.Number);
+                        command.Parameters.AddWithValue("@Password", obj.Password);     
 
-                        if(command.ExecuteNonQuery() != 0)
+                        if (command.ExecuteNonQuery() != 0)
                         {
                             success = true;
                         }
@@ -90,6 +91,30 @@ namespace SmallRatings.Services
             }
 
             return foundProducts;
+        }
+
+        public bool CheckUserExists(string username)
+        {
+            string sqlStatement = "SELECT * FROM dbo.Users WHERE (USERNAME = @Username)";
+            bool success = false;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(sqlStatement, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", username);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        success = true;
+                    }
+
+                    connection.Close();
+                }
+            }
+            return success;
         }
 
         public UserInfo LoginUser(LoginInfo user)

@@ -47,4 +47,8 @@ C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\ref\SmallRatings.dll
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\SmallRatings.pdb
 C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\SmallRatings.genruntimeconfig.cache
-C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\obj\Debug\net5.0\SmallRatings.csprojAssemblyReference.cache
+C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\bin\Debug\net5.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\bin\Debug\net5.0\System.Drawing.Common.dll
+C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\anoth\OneDrive - Grand Canyon University\GCU\CST-452\Workspace\Capstone---Small-Ratings\SmallRatingsDemo\SmallRatings\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\System.Drawing.Common.dll

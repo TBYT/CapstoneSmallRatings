@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace EmployeeCrud.Controllers
 {
-    public class UserController : Controller
+    public class UserController : Controller //
     {
         CommWithDataAccess userDAL = new CommWithDataAccess();
         public const string SessionKeyId = "_Id";

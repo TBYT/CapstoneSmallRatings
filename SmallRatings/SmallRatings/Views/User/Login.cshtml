@@ -1,0 +1,51 @@
+﻿
+@model SmallRatings.Models.LoginInfo
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*Html.BeginForm is the Html Helper Extension Method that is used for creating and rendering
+    the form in HTML. This method makes your job easier in creating form.
+    Syntax: Html.BeginForm("ActionMethod", "ControllerName","Get⁄Post Method")
+    ActionMethod – It defines which action method is look for when submit button is clicked.
+    ControllerName – It defines, which controller keeps the defined action method.
+    Get/Post Method – it defines the method you want to use to send data from form to controller. *@
+<div class="intro-body">
+    <h1>@ViewData["Title"]</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @*(Tag Helpers) -- ValidationSummary.All will display both property and model level
+                        validations messages while ValidationSummary.ModelOnly will
+                        display only validation messages that apply to the model level.*@
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control bg-transparent text-white" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control bg-transparent text-white" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn btn-success" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@*Used for "client side validation" (javascript).
+    It does not let the user send the form if it is not valid
+    (according to Model Validation).*@
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

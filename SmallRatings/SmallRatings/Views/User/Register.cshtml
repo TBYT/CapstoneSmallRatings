@@ -1,0 +1,64 @@
+﻿
+@model SmallRatings.Models.UserInfo
+@{
+    ViewData["Title"] = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="intro-body">
+    <h1>@ViewData["Title"]</h1>
+    <div class="container">
+        <div class="row">
+            <div class="flex-column mx-auto">
+                @using (Html.BeginForm("Register", "User", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control bg-transparent text-white" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control bg-transparent text-white" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control bg-transparent text-white" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                        <span class="text-danger">@TempData["UserExists"]</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control bg-transparent text-white" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Number" class="control-label"></label>
+                        <input asp-for="Number" class="form-control bg-transparent text-white" />
+                        <span asp-validation-for="Number" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control bg-transparent text-white" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+            @*Used for "client side validation" (javascript).
+                It does not let the user send the form if it is not valid
+                (according to Model Validation).*@
+            @section Scripts
+{
+                @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            }

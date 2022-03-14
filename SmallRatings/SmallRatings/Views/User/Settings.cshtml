@@ -1,0 +1,78 @@
+﻿@model SmallRatings.Models.UserInfo
+
+@{
+    ViewData["Title"] = "Profile Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="intro-body">
+    <h1>@ViewData["Title"]</h1>
+    <div class="container">
+        <div class="row">
+            <div class="flex-column mx-auto">
+                @using (Html.BeginForm("Settings", "User", FormMethod.Post, new { enctype="multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                        <span class="text-danger">@TempData["UserCheck"]</span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Number" class="control-label"></label>
+                        <input asp-for="Number" class="form-control" />
+                        <span asp-validation-for="Number" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Avatar" class="control-label"></label>
+                        <input asp-for="Avatar" accept="image/png, image/jpeg" type="file" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Current Password")
+                        <input asp-for="Password" placeholder="Confirm Current Password to Update!" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <span class="text-danger">@TempData["PasswordCheck"]</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("New Password")
+                        <input type="password" name="NewPass" placeholder="" class="form-control" />
+                        <span class="text-danger">@TempData["NewPass"]</span>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Confirm New Password")
+                        <input type="password" name="ConfirmNewPass" placeholder="" class="form-control" />
+                        <span class="text-danger">@TempData["NewPass"]</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Used for "client side validation" (javascript).
+    It does not let the user send the form if it is not valid
+    (according to Model Validation).*@
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

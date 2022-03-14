@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="intro-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-center">
+                    <h1 class="display-4">You're in the Beta!</h1>
+                    <p>Only a small subset of users have registered!</p>
+                    <h3>@TempData["RegMessage"]</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

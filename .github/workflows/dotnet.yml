@@ -26,4 +26,4 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: echoeing
-      run: echo "The secret key is:${{env.ConnectionString}}"  
+      run: echo "The secret key is:$ConnectionString"

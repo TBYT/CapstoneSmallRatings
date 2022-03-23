@@ -1,8 +1,5 @@
 name: .NET
 
-env:
-  CONNECTION_STRING : ${{ secrets.CONNECTION_STRING }}
-
 on:
   push:
     branches: [ main ]
@@ -11,8 +8,9 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    env:
+      CONNECTION_STRING : ${{ secrets.CONNECTION_STRING }}
 
     steps:
     - uses: actions/checkout@v2

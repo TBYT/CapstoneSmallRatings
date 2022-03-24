@@ -7,15 +7,16 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  publish:
     environment: myenvironment
-    env:
-       key1 : '${{ secrets.CONNECTION_STRING }}'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: SmallRatings
-      uses: actions/setup-dotnet@v1
+      env:
+         key1 : ${{ secrets.TESTSECRET }}
+      run: echo ${env.key1}
+    - uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
@@ -24,5 +25,3 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: echoeing
-      run: echo ${{env.key1}}

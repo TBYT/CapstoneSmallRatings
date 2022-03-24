@@ -1,7 +1,7 @@
 name: .NET
 
 env:
-  ConnectionString : ${{ secrets.CONNECTION_STRING }}
+  ConnectionString : '${{ secrets.CONNECTION_STRING }}'
 
 on:
   push:

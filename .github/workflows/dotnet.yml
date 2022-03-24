@@ -1,8 +1,5 @@
 name: .NET
 
-env:
-  ConnectionString : '${{ secrets.CONNECTION_STRING }}'
-
 on:
   push:
     branches: [ main ]
@@ -11,9 +8,10 @@ on:
 
 jobs:
   build:
-    
+    environment: myenvironment
+    env:
+       key1 : '${{ secrets.CONNECTION_STRING }}'
     runs-on: ubuntu-latest
-    environment: build
     steps:
     - uses: actions/checkout@v2
     - name: SmallRatings
@@ -27,4 +25,4 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: echoeing
-      run: echo "The secret key is:$ConnectionString"
+      run: echo ${{env.key1}}

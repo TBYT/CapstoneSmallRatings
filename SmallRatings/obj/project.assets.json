@@ -572,11 +572,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\SmallRatings\\SmallRatings.csproj",
+      "projectUniqueName": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\SmallRatings\\SmallRatings\\SmallRatings.csproj",
       "projectName": "SmallRatings",
-      "projectPath": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\SmallRatings\\SmallRatings.csproj",
+      "projectPath": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\SmallRatings\\SmallRatings\\SmallRatings.csproj",
       "packagesPath": "C:\\Users\\anoth\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\SmallRatings\\obj\\",
+      "outputPath": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\SmallRatings\\SmallRatings\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -16,7 +16,6 @@ namespace SmallRatings
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            Environment.SetEnvironmentVariable("DAOString", Configuration["ConnString"]);
         }
 
         public IConfiguration Configuration { get; }
@@ -31,7 +30,6 @@ namespace SmallRatings
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

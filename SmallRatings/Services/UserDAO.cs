@@ -9,7 +9,7 @@ namespace SmallRatings.Services
     public class UserDAO : IUserDataService
     {
         //the string we make a database connection with 
-        string connectionString = @Environment.GetEnvironmentVariable("DAOString");
+        string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
         public int Delete(UserInfo user)
         {
             //delete a product by its id although we pass in the model... -1 if query does not succeed.

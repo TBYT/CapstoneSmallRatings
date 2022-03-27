@@ -9,7 +9,7 @@ namespace SmallRatings.Services
     public class ProDAO : IProDataService
     {
         //the string we make a database connection with 
-        string connectionString = @Environment.GetEnvironmentVariable("DAOString");
+        string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CST451;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public int Delete(UserInfo user)
         {
             //delete a product by its id although we pass in the model... -1 if query does not succeed.

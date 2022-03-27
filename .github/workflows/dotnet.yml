@@ -1,9 +1,10 @@
 name: .NET
 
 on:
-  delete:
-    branches-ignore:
-      - main
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   delete:
@@ -13,4 +14,4 @@ jobs:
         with:
           # ⚠️ The provided token needs permission for admin write:org
           token: ${{ secrets.GITHUB_TOKEN }}
-          environment: my-environment-name
+          environment: myenvironment

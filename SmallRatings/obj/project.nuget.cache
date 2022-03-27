@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MQnL+saZdw2u8sn5ndjL7DUVj/B56HX+shiEEvAWf5e1me+Uy9+8uBkvOcIXU5BfEw5TG2t4oiM5LmE6G/vDaA==",
+  "dgSpecHash": "WPUnPSVxDPmilWXKcsaFDhjToW1N+mVaonyCGF95ZkATyLZsn79adVJ5gP+xd5iKkptGju8Tc4w5OkIkFYa6SQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\SmallRatings\\SmallRatings\\SmallRatings.csproj",
+  "projectFilePath": "C:\\Users\\anoth\\OneDrive - Grand Canyon University\\GCU\\CST-452\\Workspace\\SmallRatings\\SmallRatings.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\anoth\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\anoth\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

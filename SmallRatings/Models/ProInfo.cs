@@ -17,6 +17,7 @@ namespace SmallRatings.Models
         [Required(ErrorMessage = "Please enter your business name.")]
         public string ProName { get; set; }
 
+        [DataType(DataType.Url)]
         [Display(Name = "Website")]
         [Required(ErrorMessage = "Please enter your business's website.")]
         public string Website { get; set; }

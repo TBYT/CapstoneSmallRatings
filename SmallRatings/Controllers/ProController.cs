@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using SmallRatings.Business;
 using SmallRatings.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace SmallRatings.Controllers
@@ -15,19 +18,26 @@ namespace SmallRatings.Controllers
         public const string SessionUserId = "_Id";
         public const string SessionUserAvatar = "_UserAvatar";
         public const string SessionProId = "_Pro";
-        // GET: ProfessionalsController
         public ActionResult Index()
         {
-            var ProID = HttpContext.Session.GetInt32(SessionProId);
-            if (ProID.HasValue) //is logged in by checking session var.
+            var UserID = HttpContext.Session.GetInt32(SessionUserId);
+            if (UserID.HasValue)
             {
-                TempData["Registered"] = true;
-                return View();
+                var ProID = HttpContext.Session.GetInt32(SessionProId);
+                if (ProID.HasValue) //is logged in by checking session var.
+                {
+                    TempData["Registered"] = true;
+                    return View();
+                }
+                else
+                {
+                    TempData["Registered"] = false;
+                    return View();
+                }
             }
             else
             {
-                TempData["Registered"] = false;
-                return View();
+                return RedirectToAction("Login", "User");
             }
         }
 
@@ -38,15 +48,19 @@ namespace SmallRatings.Controllers
             //Make sure the data is valid (another form of validation)
             if (ModelState.IsValid)
             {
+                obj.UserID = (int) HttpContext.Session.GetInt32(SessionUserId);
                 if (proService.CheckDupe(obj) == false) //cannot register duplicate usernames
                 {
                     if (proService.NewBusiness(obj))
                     {
-                        return View();
+                        TempData["Registered"] = true;
+                        return View("Index");
                     }
+                    else TempData["Error"] = "Server Error, try again.";
                 }
-                else TempData["UserExists"] = "This name already exists.";
+                else TempData["Error"] = "This business name already exists.";
             }
+            TempData["Registered"] = false;
             return View("Index", obj);
         }
 

@@ -63,13 +63,6 @@
                                 <li class="nav-item nav-link">
                                     <a class="nav-link text-white" asp-area="" asp-controller="Pro" asp-action="Index">Business</a>
                                 </li>
-                                var ProID = Context.Session.GetInt32("_Pro");
-                                if (ProID.HasValue == true)
-                                {
-                                    <li class="nav-item nav-link">
-                                        <a class="nav-link text-white" asp-area="" asp-controller="Pro" asp-action="Index">BIZIN</a>
-                                    </li>
-                                }
                             }
                         }
                     </ul>

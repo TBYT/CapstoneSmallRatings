@@ -8,7 +8,8 @@ namespace SmallRatings.Services
     //NOT OPTIMIZED YET, will do so.
     public class ProDAO : IProDataService
     {
-        //the string we make a database connection with 
+        //the string we make a database connection with
+        ////if null, check Startup.cs
         string connectionString = @Environment.GetEnvironmentVariable("DAOString");
         public int Delete(UserInfo user)
         {
@@ -171,17 +172,18 @@ namespace SmallRatings.Services
         public bool NewBusiness(ProInfo proInfo)
         {
             string sqlStatement = @"INSERT INTO [dbo].[Professionals]
-           ([FIRSTNAME],[LASTNAME],[USERNAME],[PASSWORD],[EMAIL],[NUMBER],[AVATAR],[SUSPENDED]) VALUES (@FirstName,@LastName,@Username,@Password,@Email,@Number,NULL,NULL); SELECT SCOPE_IDENTITY()";
+           ([PRONAME],[PROEMAIL],[PROWEBSITE],[PRODESCRIPTION],[USERID],[LOCATION]) VALUES (@ProName,@ProEmail,@ProWebsite,@ProDescription,@UserID,@Location); SELECT SCOPE_IDENTITY()";
             bool success = false;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sqlStatement, connection);
-                command.Parameters.AddWithValue("@FirstName", proInfo.UserID);
-                command.Parameters.AddWithValue("@LastName", proInfo.ProEmail);
-                command.Parameters.AddWithValue("@Username", proInfo.Website);
-                command.Parameters.AddWithValue("@Password", proInfo.ProName);
-                command.Parameters.AddWithValue("@Number", proInfo.Description);
+                command.Parameters.AddWithValue("@UserID", proInfo.UserID);
+                command.Parameters.AddWithValue("@ProName", proInfo.ProName);
+                command.Parameters.AddWithValue("@ProEmail", proInfo.ProEmail);
+                command.Parameters.AddWithValue("@ProWebsite", proInfo.Website);
+                command.Parameters.AddWithValue("@ProDescription", proInfo.Description);
+                command.Parameters.AddWithValue("@Location", proInfo.Location);
                 try
                 {
                     connection.Open();

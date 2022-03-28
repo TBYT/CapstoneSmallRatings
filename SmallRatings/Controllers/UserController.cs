@@ -29,7 +29,7 @@ namespace SmallRatings.Controllers
                     return View();
                 }
                 else
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Login");
         }
 
         [HttpGet]
@@ -114,7 +114,7 @@ namespace SmallRatings.Controllers
                     return View(staticUser);
                 }
                 else
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Login");
         }
 
         [HttpPost]

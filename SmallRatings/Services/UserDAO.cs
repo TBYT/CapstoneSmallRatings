@@ -9,6 +9,7 @@ namespace SmallRatings.Services
     public class UserDAO : IUserDataService
     {
         //the string we make a database connection with 
+        //if null, check Startup.cs
         string connectionString = @Environment.GetEnvironmentVariable("DAOString");
         public int Delete(UserInfo user)
         {

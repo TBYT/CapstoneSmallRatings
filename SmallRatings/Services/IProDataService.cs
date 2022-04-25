@@ -10,7 +10,7 @@ namespace SmallRatings.Services
     interface IProDataService
     {
         /*List<ProInfo> GetAllUsers();*/
-        bool NewBusiness(ProInfo model);
+        int NewBusiness(ProInfo model);
         /*int Delete(ProInfo model);*/
 
         /*bool CheckUserExists(ProInfo model);*/

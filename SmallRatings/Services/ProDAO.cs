@@ -1,7 +1,8 @@
 ﻿using SmallRatings.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+using System.Data.SqlTypes;
 
 namespace SmallRatings.Services
 {
@@ -9,74 +10,20 @@ namespace SmallRatings.Services
     public class ProDAO : IProDataService
     {
         //the string we make a database connection with
-        ////if null, check Startup.cs
-        string connectionString = @Environment.GetEnvironmentVariable("DAOString");
-        public int Delete(UserInfo user)
-        {
-            //delete a product by its id although we pass in the model... -1 if query does not succeed.
-            int newIdNumber = -1;
-
-            string sqlStatement = "DELETE From dbo.product WHERE productId = @Id";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand(sqlStatement, connection);
-                command.Parameters.AddWithValue("@Id", user.UserID);
-                try
-                {
-                    connection.Open();
-                    newIdNumber = Convert.ToInt32(command.ExecuteScalar());
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            return newIdNumber;
-        }
-
-        public bool UpdateUser(UserInfo obj)
-        {
-            bool success = false;
-
-            string sqlStatement = "UPDATE Users SET FIRSTNAME = @Firstname, LASTNAME = @Lastname, USERNAME = @Username, PASSWORD = @Password, EMAIL = @Email, NUMBER = @Number WHERE ID = @ID";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(sqlStatement, connection);
-                    
-                        command.Parameters.AddWithValue("@Id", obj.UserID);
-                        command.Parameters.AddWithValue("@Firstname", obj.FirstName);
-                        command.Parameters.AddWithValue("@Lastname", obj.LastName);
-                        command.Parameters.AddWithValue("@Username", obj.Username);
-                        command.Parameters.AddWithValue("@Email", obj.Email);
-                        command.Parameters.AddWithValue("@Number", obj.Number);
-                        command.Parameters.AddWithValue("@Password", obj.Password);     
-
-                        if (command.ExecuteNonQuery() != 0)
-                        {
-                            success = true;
-                        }
-                    
-                    connection.Close();
-                }
-            return success;
-            }
-        
+        string connectionString = Environment.GetEnvironmentVariable("DAOString");
 
         public List<UserInfo> GetAllUsers()
         {
             List<UserInfo> foundProducts = new List<UserInfo>();
-            string sqlStatement = "SELECT * FROM dbo.product";
+            string sqlStatement = "SELECT * FROM product";
 
-            using(SqlConnection connection = new SqlConnection(connectionString))
+            using(MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand(sqlStatement,connection);
+                MySqlCommand command = new MySqlCommand(sqlStatement,connection);
                 try
                 {
                     /*connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
+                    MySqlDataReader reader = command.ExecuteReader();
                     while (reader.Read()) //changed after submission of mile 2
                     {
                         foundProducts.Add(new UserInfo { Id = (int)reader[0], Name = (string)reader[1], Price = (decimal)reader[2], Stock = (int)reader[3], Description = (string)reader[4]});
@@ -91,18 +38,102 @@ namespace SmallRatings.Services
             return foundProducts;
         }
 
-        public bool CheckDuplication(ProInfo proInfo)
+        public ProInfo ReturnPro(int id)
         {
-            string sqlStatement = "SELECT * FROM dbo.Professionals WHERE (PRONAME = @ProName)";
+            string sqlStatement = "SELECT * FROM professionals WHERE (ID = @ID)";
+            ProInfo proInfo = null;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", id);
+                    connection.Open();
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        proInfo = new ProInfo();
+                        proInfo.UserID = Convert.ToInt32(reader["ID"]);
+                        proInfo.ProEmail = reader["PROEMAIL"].ToString();
+                        proInfo.ProName = reader["PRONAME"].ToString();
+                        proInfo.Website = reader["PROWEBSITE"].ToString();
+                        proInfo.Description = reader["PRODESCRIPTION"].ToString();
+                        proInfo.Location = reader["LOCATION"].ToString();
+                        if (!(reader["PROAVATAR"].GetType().Equals(typeof(DBNull))))
+                        {
+                            proInfo.ProAvatar = (byte[])(reader["PROAVATAR"]);
+                        }
+                        proInfo.AvatarFileType = reader["AVATARTYPE"].ToString();
+                        if (!(reader["PROHEADER"].GetType().Equals(typeof(DBNull))))
+                        {
+                            proInfo.ProHeader = (byte[])(reader["PROHEADER"]);
+                        }
+                        proInfo.HeaderFileType = reader["HEADERTYPE"].ToString();
+                    }
+
+                    connection.Close();
+                }
+            }
+            return proInfo;
+        }
+
+        public bool UpdateBiz(ProInfo obj)
+        {
             bool success = false;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            string sqlStatement = "UPDATE professionals SET PRONAME = @ProName, PROEMAIL = @ProEmail, PROWEBSITE = @ProWebsite, PRODESCRIPTION = @Description, LOCATION = @Location,PROAVATAR = @Avatar, AVATARTYPE = @AvatarType, PROHEADER = @ProHeader, HEADERTYPE = @HeaderType WHERE ID = @ID";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                using (SqlCommand command = new SqlCommand(sqlStatement, connection))
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(sqlStatement, connection);
+
+                command.Parameters.AddWithValue("@Id", obj.ProID);
+                command.Parameters.AddWithValue("@Location", obj.Location);
+                command.Parameters.AddWithValue("@ProName", obj.ProName);
+                command.Parameters.AddWithValue("@ProEmail", obj.ProEmail);
+                command.Parameters.AddWithValue("@Description", MySqlHelper.EscapeString(obj.Description));
+                command.Parameters.AddWithValue("@ProWebsite", MySqlHelper.EscapeString(obj.Website));
+                if (obj.ProAvatar == null)
+                    command.Parameters.AddWithValue("@Avatar", SqlBinary.Null);
+                else
+                    command.Parameters.AddWithValue("@Avatar", obj.ProAvatar);
+                if (obj.AvatarFileType == null)
+                    command.Parameters.AddWithValue("@AvatarType", SqlString.Null);
+                else
+                    command.Parameters.AddWithValue("@AvatarType", obj.AvatarFileType);
+                if (obj.ProHeader == null)
+                    command.Parameters.AddWithValue("@ProHeader", SqlBinary.Null);
+                else
+                    command.Parameters.AddWithValue("@ProHeader", obj.ProHeader);
+                if (obj.HeaderFileType == null)
+                    command.Parameters.AddWithValue("@HeaderType", SqlString.Null);
+                else
+                    command.Parameters.AddWithValue("@HeaderType", obj.HeaderFileType);
+
+                if (command.ExecuteNonQuery() != 0)
+                {
+                    success = true;
+                }
+
+                connection.Close();
+            }
+            return success;
+        }
+
+        public bool CheckDuplication(ProInfo proInfo)
+        {
+            string sqlStatement = "SELECT * FROM professionals WHERE (PRONAME = @ProName)";
+            bool success = false;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
                 {
                     command.Parameters.AddWithValue("@ProName", proInfo.ProName);
                     connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
+                    MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
                     {
@@ -117,15 +148,15 @@ namespace SmallRatings.Services
 
         public int GetProID(int userId)
         {
-            string sqlStatement = "SELECT ID FROM dbo.Professionals WHERE (USERID = @userID)";
+            string sqlStatement = "SELECT ID FROM professionals WHERE (USERID = @userID)";
             int ReturnUserId = -1;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                using (SqlCommand command = new SqlCommand(sqlStatement, connection))
+                using (MySqlCommand command = new MySqlCommand(sqlStatement, connection))
                 {
                     command.Parameters.AddWithValue("@userId", userId);
                     connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
+                    MySqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
                         ReturnUserId = Convert.ToInt32(reader["ID"]);
@@ -137,58 +168,32 @@ namespace SmallRatings.Services
             return ReturnUserId;
         }
 
-        public UserInfo LoginUser(LoginInfo user)
+        public int NewBusiness(ProInfo proInfo)
         {
-            string sqlStatement = "SELECT * FROM dbo.Users WHERE (USERNAME = @Username) AND (PASSWORD = @Password)";
-            UserInfo userInfo = null;
+            string sqlStatement = "INSERT INTO `professionals` (PRONAME,PROEMAIL,PROWEBSITE,PRODESCRIPTION,PROAVATAR,PROHEADER,USERID,AVATARTYPE,HEADERTYPE,LOCATION) VALUES (@ProName,@ProEmail,@ProWebsite,@ProDescription,@ProAvatar,@ProHEader,@UserID,@AvatarType,@HeaderType,@Location); SELECT LAST_INSERT_ID();";
+            int success = -1; //can return 0 if no rows are updated
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                using (SqlCommand command = new SqlCommand(sqlStatement, connection))
-                {
-                    command.Parameters.AddWithValue("@Username", user.Username);
-                    command.Parameters.AddWithValue("@Password", user.Password);
-                        connection.Open();
-                        SqlDataReader reader = command.ExecuteReader();
-                        
-                            while (reader.Read())
-                            {
-                                userInfo = new UserInfo();
-                                userInfo.UserID = Convert.ToInt32(reader["ID"]);
-                                userInfo.Username = reader["USERNAME"].ToString();
-                                userInfo.Number = Convert.ToInt32(reader["NUMBER"]);
-                                userInfo.FirstName = reader["FIRSTNAME"].ToString();
-                                userInfo.LastName = reader["LASTNAME"].ToString();
-                                userInfo.Email = reader["EMAIL"].ToString();
-                                userInfo.Password = reader["PASSWORD"].ToString();
-                            }
-                        
-                    connection.Close();
-                }
-            }
-            return userInfo;
-        }
-
-        public bool NewBusiness(ProInfo proInfo)
-        {
-            string sqlStatement = @"INSERT INTO [dbo].[Professionals]
-           ([PRONAME],[PROEMAIL],[PROWEBSITE],[PRODESCRIPTION],[USERID],[LOCATION]) VALUES (@ProName,@ProEmail,@ProWebsite,@ProDescription,@UserID,@Location); SELECT SCOPE_IDENTITY()";
-            bool success = false;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand(sqlStatement, connection);
+                MySqlCommand command = new MySqlCommand(sqlStatement, connection);
                 command.Parameters.AddWithValue("@UserID", proInfo.UserID);
                 command.Parameters.AddWithValue("@ProName", proInfo.ProName);
                 command.Parameters.AddWithValue("@ProEmail", proInfo.ProEmail);
                 command.Parameters.AddWithValue("@ProWebsite", proInfo.Website);
                 command.Parameters.AddWithValue("@ProDescription", proInfo.Description);
                 command.Parameters.AddWithValue("@Location", proInfo.Location);
+                command.Parameters.AddWithValue("@ProAvatar", SqlBinary.Null);
+                command.Parameters.AddWithValue("@AvatarType", SqlString.Null);
+                command.Parameters.AddWithValue("@ProHeader", SqlBinary.Null);
+                command.Parameters.AddWithValue("@HeaderType", SqlString.Null);
                 try
                 {
                     connection.Open();
-                    if (Convert.ToInt32(command.ExecuteScalar()) != 0)
-                        success = true;
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        success = Convert.ToInt32(reader["LAST_INSERT_ID()"]);
+                    }
 
                 }
                 catch (Exception ex)

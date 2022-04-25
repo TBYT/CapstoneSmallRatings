@@ -29,7 +29,7 @@ namespace SmallRatings.Controllers
                     return View();
                 }
                 else
-                    return RedirectToAction("Index", "Login");
+                    return RedirectToAction("Login", "User");
         }
 
         [HttpGet]
@@ -52,11 +52,12 @@ namespace SmallRatings.Controllers
                 {
                     if (userDAL.AddUser(obj))
                     {
-                        TempData["RegMessage"] = "Registration Successful. You may now login!";
+                        //TempData["RegMessage"] = "Registration Successful. You may now login!";
                         return RedirectToAction("Index", "Home");
                     }
+                    else TempData["Error"] = "Server Error. Please try again.";
                 }
-                else TempData["UserExists"] = "This username already exists.";
+                else TempData["Error"] = "This username already exists.";
             }
             return View(obj);
         }
@@ -100,6 +101,7 @@ namespace SmallRatings.Controllers
                     staticUser = currentUser;
                     return RedirectToAction("Index", "User");
                 }
+                TempData["Error"] = "Username or Password entered is incorrect.";
             }
             return View(obj);
         }
@@ -160,8 +162,9 @@ namespace SmallRatings.Controllers
                         if (userDAL.UpdateUser(obj))
                         {
                             staticUser = obj;
-                            HttpContext.Session.SetString(SessionUserAvatar, "data:"+obj.AvatarFileType+";base64,"+Convert.ToBase64String(obj.Avatar));
-                            TempData["RegMessage"] = "Profile Update Successful!";
+                            if(obj.Avatar!=null)
+                                HttpContext.Session.SetString(SessionUserAvatar, "data:"+obj.AvatarFileType+";base64,"+Convert.ToBase64String(obj.Avatar));
+                            //TempData["RegMessage"] = "Profile Update Successful!";
                             return RedirectToAction("Index", "User");
                         }
                     }

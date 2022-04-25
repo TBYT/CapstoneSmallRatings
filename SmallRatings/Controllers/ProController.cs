@@ -18,6 +18,7 @@ namespace SmallRatings.Controllers
         public const string SessionUserId = "_Id";
         public const string SessionUserAvatar = "_UserAvatar";
         public const string SessionProId = "_Pro";
+        static ProInfo staticBusiness;
         public ActionResult Index()
         {
             var UserID = HttpContext.Session.GetInt32(SessionUserId);
@@ -26,8 +27,9 @@ namespace SmallRatings.Controllers
                 var ProID = HttpContext.Session.GetInt32(SessionProId);
                 if (ProID.HasValue) //is logged in by checking session var.
                 {
+                    staticBusiness = proService.LoginPro((int)ProID);
                     TempData["Registered"] = true;
-                    return View();
+                    return View(staticBusiness);
                 }
                 else
                 {
@@ -51,8 +53,11 @@ namespace SmallRatings.Controllers
                 obj.UserID = (int) HttpContext.Session.GetInt32(SessionUserId);
                 if (proService.CheckDupe(obj) == false) //cannot register duplicate usernames
                 {
-                    if (proService.NewBusiness(obj))
+                    int newproid = proService.NewBusiness(obj);
+                    if (newproid!=-1)
                     {
+                        staticBusiness = obj;
+                        HttpContext.Session.SetInt32(SessionProId, newproid);
                         TempData["Registered"] = true;
                         return View("Index");
                     }
@@ -64,52 +69,29 @@ namespace SmallRatings.Controllers
             return View("Index", obj);
         }
 
-        // GET: ProfessionalsController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: ProfessionalsController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ProfessionalsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult EditBiz([Bind] ProInfo obj)
         {
-            try
+            //Make sure the data is valid (another form of validation)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                obj.ProID = (int) HttpContext.Session.GetInt32(SessionProId);
+                //if proname is the same, or if changed, new proname is not duplicate.
+                if (obj.ProName == staticBusiness.ProName || proService.CheckDupe(obj) == false)
+                {
+                    if (proService.UpdateBiz(obj))
+                    {
+                        //HttpContext.Session.SetString(SessionUserAvatar, "data:" + obj.AvatarFileType + ";base64," + Convert.ToBase64String(obj.Avatar));
+                        //TempData["RegMessage"] = "Business Profile Update Successful!";
+                        return RedirectToAction("Index", "Pro");
+                    }
+                    else TempData["Error"] = "Server Error, try again.";
+                }
+                else TempData["Error"] = "This business name already exists.";
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProfessionalsController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ProfessionalsController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            TempData["Registered"] = true;
+            return View("Index", obj);
         }
 
         // GET: ProfessionalsController/Delete/5

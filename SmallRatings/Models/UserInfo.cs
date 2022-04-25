@@ -27,7 +27,11 @@ namespace SmallRatings.Models
         [Required(ErrorMessage = "Please enter your email.")]
         public string Email { get; set; }
 
-        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Location")]
+        [Required(ErrorMessage = "Please enter the location.")]
+        public string Location { get; set; }
+
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$")]
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = "Please enter a phone number.")]
         public int Number { get; set; }

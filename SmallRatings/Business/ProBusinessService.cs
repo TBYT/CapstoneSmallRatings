@@ -27,7 +27,7 @@ namespace SmallRatings.Business
             return proDao.CheckDuplication(proInfo);
         }
 
-        public bool NewBusiness(ProInfo proInfo)
+        public int NewBusiness(ProInfo proInfo)
         {
             proDao = new ProDAO();
             return proDao.NewBusiness(proInfo);
@@ -37,23 +37,35 @@ namespace SmallRatings.Business
         {
             return proDao.GetProID(userId);
         }
+
+        public bool UpdateBiz(ProInfo obj)
+        {
+            proDao = new ProDAO();
+            return proDao.UpdateBiz(obj);
+        }
+
+        public ProInfo LoginPro(int id)
+        {
+            proDao = new ProDAO();
+            return proDao.ReturnPro(id);
+        }
         /*
-       public bool AddUser(ProInfo user)
-       {
-           proDao = new ProDAO();
-           return proDao.Insert(user);
-       }
+public bool AddUser(ProInfo user)
+{
+proDao = new ProDAO();
+return proDao.Insert(user);
+}
 
-       public UserInfo LoginUser(ProInfo user)
-       {
-           proDao = new ProDAO();
-           return proDao.LoginUser(user);
-       }
+public UserInfo LoginUser(ProInfo user)
+{
+proDao = new ProDAO();
+return proDao.LoginUser(user);
+}
 
-       public bool UpdateUser(ProInfo obj)
-       {
-           proDao = new ProDAO();
-           return proDao.UpdateUser(obj);
-       }*/
+public bool UpdateUser(ProInfo obj)
+{
+proDao = new ProDAO();
+return proDao.UpdateUser(obj);
+}*/
     }
 }

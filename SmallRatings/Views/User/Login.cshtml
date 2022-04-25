@@ -20,9 +20,10 @@
                 {
                     @Html.AntiForgeryToken()
                     @*(Tag Helpers) -- ValidationSummary.All will display both property and model level
-                        validations messages while ValidationSummary.ModelOnly will
-                        display only validation messages that apply to the model level.*@
+            validations messages while ValidationSummary.ModelOnly will
+            display only validation messages that apply to the model level.*@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <span class="text-danger">@TempData["Error"]</span>
                     <div class="form-group">
                         <label asp-for="Username" class="control-label"></label>
                         <input asp-for="Username" class="form-control bg-transparent text-white" />

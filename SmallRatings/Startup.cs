@@ -16,7 +16,6 @@ namespace SmallRatings
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            Environment.SetEnvironmentVariable("DAOString", Configuration["ConnString"]);
         }
 
         public IConfiguration Configuration { get; }

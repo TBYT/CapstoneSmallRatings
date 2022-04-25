@@ -82,11 +82,8 @@ Manual deployment directly through Visual Studio
 
 **Complete List of Diagrams & Designs**
 - [Wireframe]()
-- [Physical Architecture Diagram]()
-- [Logical High Level Diagram]()
 - [Logical Solution Diagram]()
 - [Sitemap]()
-- [UML Diagram]()
 - [Database - ER Diagram]()
 
 ---

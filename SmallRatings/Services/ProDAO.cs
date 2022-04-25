@@ -12,22 +12,22 @@ namespace SmallRatings.Services
         //the string we make a database connection with
         string connectionString = Environment.GetEnvironmentVariable("DAOString");
 
-        public List<UserInfo> GetAllUsers()
+        public List<ProInfo> GetAllBusinesses()
         {
-            List<UserInfo> foundProducts = new List<UserInfo>();
-            string sqlStatement = "SELECT * FROM product";
+            List<ProInfo> foundBusinesses = new List<ProInfo>();
+            string sqlStatement = "SELECT * FROM professionals";
 
             using(MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand command = new MySqlCommand(sqlStatement,connection);
                 try
                 {
-                    /*connection.Open();
+                    connection.Open();
                     MySqlDataReader reader = command.ExecuteReader();
                     while (reader.Read()) //changed after submission of mile 2
                     {
-                        foundProducts.Add(new UserInfo { Id = (int)reader[0], Name = (string)reader[1], Price = (decimal)reader[2], Stock = (int)reader[3], Description = (string)reader[4]});
-                    }*/
+                        foundBusinesses.Add(new ProInfo { ProID = (int)reader[0], ProName = (string)reader[1], ProEmail = (string)reader[2], Website = (string)reader[3], Description = (string)reader[4], ProAvatar = (byte[])reader[5], ProHeader = (byte[])reader[6], UserID = (int)reader[7], AvatarFileType = (string)reader[8], HeaderFileType = (string)reader[9], Location = (string)reader[10] });
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -35,7 +35,7 @@ namespace SmallRatings.Services
                 }
             }
 
-            return foundProducts;
+            return foundBusinesses;
         }
 
         public ProInfo ReturnPro(int id)

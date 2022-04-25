@@ -13,13 +13,13 @@ namespace SmallRatings.Business
     public class ProBusinessService
     {
         ProDAO proDao = new ProDAO();
-       /*
-        public IEnumerable<ProInfo> GetAllUsers()
+       
+        public IEnumerable<ProInfo> GetAllBiz()
         {
             proDao = new ProDAO();
-            IEnumerable<ProInfo> allUsers = proDao.GetAllUsers();
-            return allUsers;
-        }*/
+            IEnumerable<ProInfo> allBiz = proDao.GetAllBusinesses();
+            return allBiz;
+        }
 
         public bool CheckDupe(ProInfo proInfo)
         {

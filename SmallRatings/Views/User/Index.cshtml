@@ -1,4 +1,6 @@
 ﻿@{
+    @model SmallRatings.Models.ProInfo;
+
     ViewData["Title"] = "Feed";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,8 +11,13 @@
             <div class="col-lg-8 mx-auto">
                 <div class="text-center">
                     <h1 class="display-4">Welcome</h1>
-                    <p>Businesses will show up here soon.</p>
-                    @*<h3>@TempData["RegMessage"]</h3>*@
+                    <p>Businesses will show up here.</p>
+                    @*@{ for (int i = 0; i < Model; i++)
+                        {
+                            _
+                        }
+            }
+                                }*@
                 </div>
             </div>
         </div>

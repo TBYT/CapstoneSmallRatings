@@ -4,6 +4,7 @@ using SmallRatings.Business;
 using SmallRatings.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Collections.Generic;
 
 namespace SmallRatings.Controllers
 {
@@ -26,7 +27,8 @@ namespace SmallRatings.Controllers
                 var UserID = HttpContext.Session.GetInt32(SessionUserId);
                 if (UserID.HasValue) //is logged in by checking session var.
                 {
-                    return View();
+                    ProInfo[] Businesses = (ProInfo[])proService.GetAllBiz();
+                    return View(Businesses);
                 }
                 else
                     return RedirectToAction("Login", "User");

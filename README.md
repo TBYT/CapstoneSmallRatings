@@ -15,11 +15,6 @@
 This project builds a platform that allows the community of small niche businesses to thrive in. An example of a business that would fit this platform would be catering, power washing, contractors, etc. Businesses will be listed where clients can see them. A user can create a business on this platform.
 
 ---
-## Requirements
-      
-#### Functional Requirements
-
-
 
 #### Non-Functional Requirements \[NFRs]
 - Availability (Hosted)
@@ -58,12 +53,11 @@ This project builds a platform that allows the community of small niche business
 ---
 ## Cloud Deployment - Azure
 ``` 
-Azure a cloud computing service operated by Microsoft for application management via Microsoft-managed
-data centers.
+Azure is a cloud computing service operated by Microsoft for application management.
 
 Used MySQL in App to deploy database.
 
-Manual deployment directly through Visual Studio 
+Manual deployment directly through Visual Studio.
 ```
 
 #### Monitoring
@@ -78,7 +72,6 @@ Manual deployment directly through Visual Studio
 
 ---
 ## Technical Approach
-
 
 **List of Diagrams & Designs**
 - [Wireframe](https://raw.githubusercontent.com/TBYT/CapstoneSmallRatings/main/README/Wireframe.jpg)

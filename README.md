@@ -13,6 +13,7 @@
 
 ## Introduction
 This project builds a platform that allows the community of small niche businesses to thrive in. An example of a business that would fit this platform would be catering, power washing, contractors, etc. Businesses will be listed where clients can see them. A user can create a business on this platform.
+[Official Website](https://smallratings.azurewebsites.net)
 
 ---
 

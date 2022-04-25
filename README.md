@@ -80,11 +80,10 @@ Manual deployment directly through Visual Studio
 ## Technical Approach
 
 
-**Complete List of Diagrams & Designs**
-- [Wireframe]()
-- [Logical Solution Diagram]()
-- [Sitemap]()
-- [Database - ER Diagram]()
+**List of Diagrams & Designs**
+- [Wireframe](https://raw.githubusercontent.com/TBYT/CapstoneSmallRatings/main/README/Wireframe.jpg)
+- [Logical Solution Diagram](https://raw.githubusercontent.com/TBYT/CapstoneSmallRatings/main/README/Logical1.png)
+- [Database - ER Diagram](https://raw.githubusercontent.com/TBYT/CapstoneSmallRatings/main/README/ERDiagram.JPG)
 
 ---
 ## Risks & Challenges

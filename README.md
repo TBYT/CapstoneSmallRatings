@@ -4,7 +4,7 @@
   </tr>
   <tr>
     <td colspan=8 align="center"><h1>Small Ratings Project Portfolio</h1></td>
-    <td colspan=2><img width="200px" height="200px" src="https://raw.githubusercontent.com/TBYT/HerokuTestDeploy/main/SmallRatingsLogo1.png?token=GHSAT0AAAAAABQN6TPEKA2NV5DBQJ7ERDMWYTGGNZA" alt="Small Ratings LOGO"></td>
+    <td colspan=2><img width="200px" height="200px" src="https://smallratings.azurewebsites.net/img/SmallRatingsLogo1.png" alt="Small Ratings LOGO"></td>
   </tr>
   <tr>
     <td colspan=10 align="center"><h3>Brian Basinger</h3></td>

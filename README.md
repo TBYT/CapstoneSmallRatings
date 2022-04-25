@@ -86,11 +86,11 @@ Manual deployment directly through Visual Studio
 - [Logical High Level Diagram]()
 - [Logical Solution Diagram]()
 - [Sitemap]()
-- [API - UML Diagram]()
+- [UML Diagram]()
 - [Database - ER Diagram]()
 
 ---
-## Risks & Challanges
+## Risks & Challenges
 
 ### Challenges 
 <ul>

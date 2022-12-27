@@ -28,7 +28,7 @@ This project builds a platform that allows the community of small niche business
 - ASP.NET MVC Core
 - HTLM5
 - CSS3
-- C/C++
+- C#
 - JavaScript
 - Bootstrap \[v5.1.3]
 - Hosting
